@@ -5,12 +5,13 @@
 	<body>
 		<h3>Connect to Facebook</h3>
 		
-		<form action="/connect/facebook" method="POST">
-			<input type="hidden" name="scope" value="read_stream" />
+		<form action="/connect/facebook" method="POST">				
+			<input type="hidden" name="scope" value="publish_actions,public_profile,user_posts,user_videos,user_photos,email,user_likes" />
 			<div class="formInfo">
 				<p>You aren't connected to Facebook yet. Click the button to connect this application with your Facebook account.</p>
 			</div>
 			<p><button type="submit">Connect to Facebook</button></p>
-		</form>
+		</form>		
+			
 	</body>
 </html>

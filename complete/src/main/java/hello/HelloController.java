@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
+import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +29,8 @@ public class HelloController {
         }
 
         model.addAttribute(facebook.userOperations().getUserProfile());
-        PagedList<Post> homeFeed = facebook.feedOperations().getHomeFeed();
-        model.addAttribute("feed", homeFeed);
+        User userProfile = facebook.userOperations().getUserProfile();
+        model.addAttribute("userProfile", userProfile);
 
         return "hello";
     }
