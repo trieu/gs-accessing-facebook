@@ -1,6 +1,10 @@
 <html>
 	<head>
 		<title>Hello Facebook</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+		
+		<link rel='stylesheet' href='/assets/bootstrap/3.1.0/css/bootstrap.min.css'>
+		<script type="text/javascript" src="/assets/jquery/2.2.0/jquery.js"></script>
 	</head>
 	<body>
 		<h3>Connect to Facebook</h3>
