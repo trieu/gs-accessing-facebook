@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VidzeoAdminServletContextListener implements ServletContextListener {
+	
+	
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {

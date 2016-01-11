@@ -1,5 +1,8 @@
 package hello;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +12,8 @@ import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
 
 @Controller
 public class LoginController {
@@ -25,18 +29,33 @@ public class LoginController {
 		this.facebook = facebook;
 		this.repository = repository;
 	}
+	
+	public final static Map<String, User> facebookSessions = new HashMap<>();
+	
 
 	@RequestMapping("/login")
-	public String index(Model model) {
+	public String login(@RequestParam(value="ssid",defaultValue="") String ssid, Model model) {		
+		System.out.println("facebookSession: "+facebookSessions.get(ssid));
+		System.out.println("ssid: "+ssid);
+		System.out.println(repository.findConnections("facebook").size());
+		
 		if (repository.findConnections("facebook").isEmpty() || !facebook.isAuthorized()) {
 			return "redirect:/connect/facebook";
 		}
-
+		
+		
+		
+		
+		String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
+		System.out.println("sessionId: "+sessionId);
+		
 		User userProfile = facebook.userOperations().getUserProfile();
+		facebookSessions.put(sessionId, userProfile);
 		model.addAttribute("userProfile", userProfile);
 		System.out.println(helloService.getHelloMessage());
 
-		return "hello";
+		return "redirect:/";
+		
 	}
 
 

@@ -4,15 +4,13 @@ package hello;
 
 import java.net.MalformedURLException;
 
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import net.bican.wordpress.FilterPost;
 import net.bican.wordpress.Post;
@@ -21,8 +19,7 @@ import net.bican.wordpress.Wordpress;
 @Controller
 public class IndexController {
 	
-	private Facebook facebook;
-	private ConnectionRepository repository;
+	
 	
 	@Autowired
 	private VidzeoConfig vidzeoConfig;
@@ -39,21 +36,20 @@ public class IndexController {
 	}
 
 
-	@Inject
-	public IndexController(Facebook facebook, ConnectionRepository repository) {
-		this.facebook = facebook;
-		this.repository = repository;
-	}
 	
-	boolean isAuthorized(){
-		return !repository.findConnections("facebook").isEmpty() && facebook.isAuthorized();
+	boolean isAuthorized(String sessionId){
+		System.out.println("facebookSession: "+LoginController.facebookSessions.get(sessionId));
+		return LoginController.facebookSessions.containsKey(sessionId);
 	}
 
-	@RequestMapping("/")
+	@RequestMapping( value="/", method = RequestMethod.GET)
 	public String index(Model model) {
-		System.out.println("==> getWordpressUsername " + vidzeoConfig.getWordpressUsername() );
-		if (isAuthorized()) {
-			User userProfile = facebook.userOperations().getUserProfile();
+		
+		String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
+		System.out.println("==> sessionId " + sessionId);
+		model.addAttribute("sessionId", sessionId);
+		if (isAuthorized(sessionId)) {
+			User userProfile = LoginController.facebookSessions.get(sessionId);
 			model.addAttribute("userProfile", userProfile);
 			
 			try {
