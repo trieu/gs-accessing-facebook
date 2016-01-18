@@ -1,4 +1,4 @@
-package hello;
+package vidzeo.user.services;
 
 
 import org.springframework.beans.factory.annotation.Value;

@@ -6,7 +6,7 @@
 		<h3>Connected to Facebook</h3>
 		
 		<script type="text/javascript">
-			window.location = "/login";
+			window.location = "/fblogin";
 		</script>	
 	</body>
 </html>

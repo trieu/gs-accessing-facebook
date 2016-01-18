@@ -13,7 +13,7 @@
 <#if userProfile??>
    Email: ${userProfile.email} 
 <#else>
-	<a href="/login?ssid=${sessionId}" class="btn btn-info" role="button">Login</a> 
+	<a href="/fblogin?ssid=${sessionId}" class="btn btn-info" role="button">Login</a> 
 </#if>
 
 

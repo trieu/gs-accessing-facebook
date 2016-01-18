@@ -1,4 +1,4 @@
-package hello;
+package vidzeo.app;
 
 
 import javax.servlet.ServletContextEvent;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class VidzeoAdminServletContextListener implements ServletContextListener {
+public class VidzeoServletContextListener implements ServletContextListener {
 	
 	
 
