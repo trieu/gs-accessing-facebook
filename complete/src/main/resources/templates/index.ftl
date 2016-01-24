@@ -10,11 +10,9 @@
 <body>
 <div class="alert alert-success" role="alert">Demo</div>
 
-<#if userProfile??>
-   Email: ${userProfile.email} 
-<#else>
-	<a href="/fblogin?ssid=${sessionId}" class="btn btn-info" role="button">Login</a> 
-</#if>
+
+	<a href="/fblogin" class="btn btn-info" role="button">Login</a> 
+
 
 
 
